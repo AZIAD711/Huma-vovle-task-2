@@ -13,3 +13,24 @@ export const getUserByIdService =  (userId)=>{
         _id : userId
     })
 }
+// UPDATE USER DATA 
+export const updateUserService = async (userId, data) => {
+    const existUser = await UserModel.findById(userId);
+
+    if (!existUser) {
+        throw new Error("USER ID IS NOT FOUND!");
+    }
+
+    return await UserModel.findByIdAndUpdate(
+        userId,
+        {
+            name: data.name,
+            email: data.email,
+            password: data.password,
+        },
+        {
+            new: true,
+            runValidators: true,
+        }
+    );
+};
