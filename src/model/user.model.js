@@ -30,7 +30,10 @@ const userSchema = new Schema({
         match: [
             /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>_\-+=/\\[\];'`~])[^\s]{8,}$/,
             "ENTER VALID PASSWORD FORMATE !"
-        ]
+        ],
+        get(){
+            return "********"
+        }
     },
 
 },
@@ -39,6 +42,8 @@ const userSchema = new Schema({
     strict:true,
     strictQuery:true,
     collection:"user_data",
+    toJSON:{getters:true},
+    toObject:{getters:true}
 }
 )
 // USER MODEL 
