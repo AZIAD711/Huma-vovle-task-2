@@ -6,8 +6,8 @@ export const databaseConnection = async () => {
     // DATABASE CONNECTION 
     try {
         await mongoose.connect(databaseUrl, {
-            maxPoolSize: process.env.POOL_SIZE,
-            serverSelectionTimeoutMS: process.env.SERVER_TIMEOUT
+            maxPoolSize: Number(process.env.POOL_SIZE),
+            serverSelectionTimeoutMS: Number(process.env.SERVER_TIMEOUT)
         })
 
         console.log("✅ DATABASE IS CONNECTED !")
