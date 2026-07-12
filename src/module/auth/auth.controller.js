@@ -1,5 +1,5 @@
-import { addNewUserService ,getAllUsersService,getUserByIdService,updateUserService} from "./auth.service.js";
-import { createdDataResponse,dataFoundResponse,dataUpdatedResponse } from "../../common/response/sccuess.js";
+import { addNewUserService ,getAllUsersService,getUserByIdService,updateUserService,deleteUserService} from "./auth.service.js";
+import { createdDataResponse,dataFoundResponse,dataUpdatedResponse,dataDeletedResponse } from "../../common/response/sccuess.js";
 import { internalServerResponse } from "../../common/response/error.js";
 
 // ADD NEW USER
@@ -69,6 +69,27 @@ export const updateUserController = async (request, response) => {
         const user = await updateUserService(id,userData);
 
         return dataUpdatedResponse({
+            response,
+            message: "User",
+            data: user,
+        });
+    } catch (error) {
+        console.log("❌ ERROR IN USER CONTROLLER:", error);
+
+        return internalServerResponse({
+            response,
+            message: error.message,
+        });
+    }
+};
+// DELETE USER DATA
+export const deleteUserController = async (request, response) => {
+    try {
+        const { id } = request.params;
+
+        const user = await deleteUserService(id);
+
+        return dataDeletedResponse({
             response,
             message: "User",
             data: user,

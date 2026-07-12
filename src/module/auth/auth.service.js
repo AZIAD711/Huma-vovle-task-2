@@ -34,3 +34,9 @@ export const updateUserService = async (userId, data) => {
         }
     );
 };
+// DELETE USER DATA 
+export const deleteUserService =  async(userId)=>{
+    return  await UserModel.findByIdAndDelete({
+        _id : userId
+    })
+}
