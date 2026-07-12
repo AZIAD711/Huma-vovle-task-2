@@ -18,7 +18,7 @@ export const updateUserService = async (userId, data) => {
     const existUser = await UserModel.findById(userId);
 
     if (!existUser) {
-        throw new Error("USER ID IS NOT FOUND!");
+        throw new Error("USER NOT FOUND !");
     }
 
     return await UserModel.findByIdAndUpdate(
@@ -30,7 +30,6 @@ export const updateUserService = async (userId, data) => {
         },
         {
             new: true,
-            runValidators: true,
         }
     );
 };
@@ -40,3 +39,9 @@ export const deleteUserService =  async(userId)=>{
         _id : userId
     })
 }
+// SERACH USER BY EMAIL 
+export const searchByEmailService = (email) => {
+    return UserModel.findOne({
+        email: email,
+    });
+};

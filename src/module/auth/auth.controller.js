@@ -1,4 +1,4 @@
-import { addNewUserService ,getAllUsersService,getUserByIdService,updateUserService,deleteUserService} from "./auth.service.js";
+import { addNewUserService ,getAllUsersService,getUserByIdService,updateUserService,deleteUserService,searchByEmailService} from "./auth.service.js";
 import { createdDataResponse,dataFoundResponse,dataUpdatedResponse,dataDeletedResponse } from "../../common/response/sccuess.js";
 import { internalServerResponse } from "../../common/response/error.js";
 
@@ -92,6 +92,27 @@ export const deleteUserController = async (request, response) => {
         return dataDeletedResponse({
             response,
             message: "User",
+            data: user,
+        });
+    } catch (error) {
+        console.log("❌ ERROR IN USER CONTROLLER:", error);
+
+        return internalServerResponse({
+            response,
+            message: error.message,
+        });
+    }
+};
+// SERACH ABOUT USER BY EMAIL 
+export const searchByEmailController = async (request, response) => {
+    try {
+        const { email } = request.query;
+
+        const user = await searchByEmailService(email);
+
+        return dataFoundResponse({
+            response,
+            message: "Email",
             data: user,
         });
     } catch (error) {

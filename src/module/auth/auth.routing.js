@@ -1,8 +1,10 @@
-import {addNewUserController,getAllUsersController,getUserByIdController,updateUserController,deleteUserController} from "./auth.controller.js"
+import {addNewUserController,getAllUsersController,getUserByIdController,updateUserController,deleteUserController,searchByEmailController} from "./auth.controller.js"
 import express from "express"
 const userRouter = express.Router()
 // http://localhost:4000/api/v1/user/add
 userRouter.post("/add",addNewUserController)
+// http://localhost:4000/api/v1/user/search?email=value
+userRouter.get("/search",searchByEmailController)
 // http://localhost:4000/api/v1/user/
 userRouter.get("/",getAllUsersController)
 // http://localhost:4000/api/v1/user/:id
