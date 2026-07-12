@@ -7,3 +7,9 @@ export const addNewUserService = async (data)=>{
 export const getAllUsersService = async ()=>{
     return await UserModel.find()
 }
+// GET USER BY ID
+export const getUserByIdService =  (userId)=>{
+    return  UserModel.findOne({
+        _id : userId
+    })
+}

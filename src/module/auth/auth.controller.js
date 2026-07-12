@@ -1,4 +1,4 @@
-import { addNewUserService ,getAllUsersService} from "./auth.service.js";
+import { addNewUserService ,getAllUsersService,getUserByIdService} from "./auth.service.js";
 import { createdDataResponse,dataFoundResponse } from "../../common/response/sccuess.js";
 import { internalServerResponse } from "../../common/response/error.js";
 
@@ -37,6 +37,27 @@ export const getAllUsersController = async (request, response) => {
         return internalServerResponse({
             response,
             message:error.message
+        });
+    }
+};
+// GET USER BY ID
+export const getUserByIdController = async (request, response) => {
+    try {
+        const { id } = request.params;
+
+        const user = await getUserByIdService(id);
+
+        return dataFoundResponse({
+            response,
+            message: "User",
+            data: user,
+        });
+    } catch (error) {
+        console.log("❌ ERROR IN USER CONTROLLER:", error);
+
+        return internalServerResponse({
+            response,
+            message: error.message,
         });
     }
 };
